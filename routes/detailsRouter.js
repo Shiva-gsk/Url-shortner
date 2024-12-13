@@ -9,6 +9,9 @@ const Url = require('../models/urlSchema');
 
 router.get('/', async (req, res) => {
     const { url } = req.query;
+    if(!url.startsWith("http")){
+        url = `http://${url}`;
+    }
 
     try {
         const urlDoc = await Url.findOne({ $or: [{ longUrl: url }, { shortUrl: url }] });
