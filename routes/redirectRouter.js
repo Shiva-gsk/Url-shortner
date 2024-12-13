@@ -7,10 +7,17 @@ router.use(bodyParser.urlencoded({ extended: true }));
 const shortid = require('shortid');
 const Url = require('../models/urlSchema');
 
-router.get('/:shortUrl', async (req, res) => {
-    const { shortUrl } = req.params;
+router.get('/', async (req, res) => {
+    const { shortUrl } = req.query;
     // console.log(shortUrl)
-    const fullShortUrl = `http://localhost:3000/${shortUrl}`;
+    const fullShortUrl = shortUrl;
+    if (shortUrl.startsWith("localhost")){
+        fullShortUrl = `http://${shortUrl}`;
+    }
+    if (!shortUrl.startsWith("http")){
+        fullShortUrl = `http://localhost:3000/${shortUrl}`;
+    }
+    
 
     try {
         const urlDoc = await Url.findOne({ shortUrl: fullShortUrl });
@@ -22,10 +29,10 @@ router.get('/:shortUrl', async (req, res) => {
         await urlDoc.save();
 
         if (urlDoc.hitCount % 10 === 0) {
-            return res.redirect('https://www.google.com');
+            return res.status(302).redirect('https://www.google.com');
         }
 
-        res.redirect(urlDoc.longUrl);
+        res.status(302).redirect(urlDoc.longUrl);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });

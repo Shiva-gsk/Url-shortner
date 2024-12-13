@@ -37,8 +37,8 @@ const topRouter = require("./routes/topRouter");
 const Url = require('./models/urlSchema');
 
 // MongoDB connection
-const mongoURL = MONGODB_URL;
-mongoose.connect(mongoURL, { useNewUrlParser: true });
+const mongoURL = MONGODB_URL || 'mongodb+srv://admin:admin@cluster0.pgqn1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+mongoose.connect(mongoURL);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => console.log('Connected to MongoDB'));
