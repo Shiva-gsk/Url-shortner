@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const shortid = require('shortid');
 const rateLimit = require('express-rate-limit');
+const MONGODB_URL =  process.env.MONGODB_URL;
 
 const limiter1 = rateLimit({
     windowMs: 24*60 * 60 * 1000, 
@@ -36,8 +37,8 @@ const topRouter = require("./routes/topRouter");
 const Url = require('./models/urlSchema');
 
 // MongoDB connection
-const mongoURI = 'mongodb+srv://admin:admin@cluster0.pgqn1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
-mongoose.connect(mongoURI, { useNewUrlParser: true });
+const mongoURL = MONGODB_URL;
+mongoose.connect(mongoURL, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => console.log('Connected to MongoDB'));
