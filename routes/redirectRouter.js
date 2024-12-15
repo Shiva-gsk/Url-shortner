@@ -7,16 +7,21 @@ router.use(bodyParser.urlencoded({ extended: true }));
 const shortid = require('shortid');
 const Url = require('../models/urlSchema');
 
-router.get('/', async (req, res) => {
-    const { shortUrl } = req.query;
-    // console.log(shortUrl)
-    const fullShortUrl = shortUrl;
-    if (shortUrl.startsWith("localhost")){
-        fullShortUrl = `http://${shortUrl}`;
-    }
-    if (!shortUrl.startsWith("http")){
-        fullShortUrl = `http://localhost:3000/${shortUrl}`;
-    }
+// /:shortUrl -> is just shortid
+router.get('/:shortUrl', async (req, res) => {
+    const { shortUrl } = req.params;
+    const fullShortUrl = `http://localhost:3000/${shortUrl}`;
+
+    //Query Param
+    // const { shortUrl } = req.query;
+    // // console.log(shortUrl)
+    // const fullShortUrl = shortUrl;
+    // if (shortUrl.startsWith("localhost")){
+    //     fullShortUrl = `http://${shortUrl}`;
+    // }
+    // if (!shortUrl.startsWith("http")){
+    //     fullShortUrl = `http://localhost:3000/${shortUrl}`;
+    // }
     
 
     try {

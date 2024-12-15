@@ -7,6 +7,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 const shortid = require('shortid');
 const Url = require('../models/urlSchema');
 
+
 router.get('/', async (req, res) => {
     const { url } = req.query;
     if(!url.startsWith("http")){
