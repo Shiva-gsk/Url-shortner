@@ -22,5 +22,6 @@ Api Endpoints:-
 
 - Clone the repository in our local computer
 - Open terminal and use command `npm install` to install all the required packages
+- Create a folder .env and a variable `MONGODB_URL` and give it your mongodb connection string
 - After installing packages run command server.js and your server will be started
 
