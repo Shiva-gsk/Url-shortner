@@ -16,3 +16,11 @@ Api Endpoints:-
 
 4. GET /top/:number
    - returns top Urls based on hitCount limited to dynamic parameter number
+
+
+# Setup Guide
+
+- Clone the repository in our local computer
+- Open terminal and use command `npm install` to install all the required packages
+- After installing packages run command server.js and your server will be started
+
