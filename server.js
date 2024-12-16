@@ -5,7 +5,7 @@ const shortid = require('shortid');
 const rateLimit = require('express-rate-limit');
 
 const MONGODB_URL =  process.env.MONGODB_URL;
-
+// Using express-rate-limiter on each api endpoint seperately
 const limiter1 = rateLimit({
     windowMs: 24*60 * 60 * 1000, 
     max: 20 
